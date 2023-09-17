@@ -13,6 +13,9 @@ class PrimeSearchService {
     private var producers: ArrayList<Producer> = ArrayList()
     private var consumers: ArrayList<Consumer> = ArrayList()
 
+    /**
+     * Start the prime search with the number of [threadNumber] consumer thread for process
+     */
     fun start(threadNumber: Int) {
         this.threadNumber = threadNumber
         primeNumbers.clear()
@@ -33,14 +36,23 @@ class PrimeSearchService {
         isRunning = true;
     }
 
+    /**
+     * Returns with the found prime numbers between [start] and [end] number
+     */
     fun getPrimeNumberWithinTheInterval(start: Int, end: Int): List<Int> {
         return primeNumbers.filter { e -> (e in start..end) }
     }
 
+    /**
+     * Returns with the last found prime number
+     */
     fun getLastFoundPrimeNumber(): Int {
         return if(!primeNumbers.isEmpty()) primeNumbers.last() else 0
     }
 
+    /**
+     * Stop the prime search process
+     */
     fun stop() {
         if (isRunning) {
             isRunning = false

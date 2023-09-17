@@ -12,10 +12,16 @@ class Consumer(private val dataQueue: DataQueue, private val primeNumbers: Concu
         consume()
     }
 
+    /**
+     * Stop the consume process
+     */
     fun stop() {
         running = false
     }
 
+    /**
+     * Get number from the queue and check with [isPrime] and save if true while the process running
+     */
     private fun consume() {
         logger.info{ "Consumer started thread id: ${Thread.currentThread().id}" }
         while (running) {
@@ -43,6 +49,9 @@ class Consumer(private val dataQueue: DataQueue, private val primeNumbers: Concu
         logger.info{ "Consumer stopped" }
     }
 
+    /**
+     * Returns with true if [number] is prime otherwise false
+     */
     private fun isPrime(number: Int): Boolean {
         if (number <= 1) {
             return false

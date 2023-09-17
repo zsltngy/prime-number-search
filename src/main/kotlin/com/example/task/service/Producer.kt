@@ -13,10 +13,16 @@ class Producer(private val dataQueue: DataQueue) : Runnable {
         produce()
     }
 
+    /**
+     * Stop the produce process
+     */
     fun stop() {
         running = false
     }
 
+    /**
+     * Add numbers to the queue from the [getNextNumber] while the process running
+     */
     private fun produce() {
         logger.info{ "Producer started thread id: ${Thread.currentThread().id}" }
         while (running) {
@@ -31,7 +37,7 @@ class Producer(private val dataQueue: DataQueue) : Runnable {
             if (!running) {
                 break;
             }
-            val generatedNumber = generateNumber()
+            val generatedNumber = getNextNumber()
             dataQueue.add(generatedNumber)
 
             sleep((Math.random() * 10).toLong())
@@ -39,7 +45,10 @@ class Producer(private val dataQueue: DataQueue) : Runnable {
         logger.info{ "Producer stopped" }
     }
 
-    private fun generateNumber(): Int {
+    /**
+     * Get numbers from zero and increment it on every call
+     */
+    private fun getNextNumber(): Int {
         return counter.incrementAndGet()
     }
 }
