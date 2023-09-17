@@ -5,8 +5,8 @@ import java.util.concurrent.ConcurrentSkipListSet
 
 @Service
 class PrimeSearchService {
-    var isRunning: Boolean = false;
-    private var threadNumber: Int = 1;
+    var isRunning: Boolean = false
+    private var threadNumber: Int = 1
     private var primeNumbers: ConcurrentSkipListSet<Int> = ConcurrentSkipListSet()
     private var dataQueue: DataQueue = DataQueue(1000)
     private var threads: ArrayList<Thread> = ArrayList()
@@ -33,7 +33,7 @@ class PrimeSearchService {
             consumerThread.start()
             threads.add(consumerThread)
         }
-        isRunning = true;
+        isRunning = true
     }
 
     /**

@@ -35,7 +35,7 @@ class Producer(private val dataQueue: DataQueue) : Runnable {
             }
 
             if (!running) {
-                break;
+                break
             }
             val generatedNumber = getNextNumber()
             dataQueue.add(generatedNumber)
