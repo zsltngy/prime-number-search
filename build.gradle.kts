@@ -22,11 +22,6 @@ repositories {
 dependencies {
 	implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
 	implementation("ch.qos.logback:logback-classic:1.4.11")
-	/*implementation("io.springfox:springfox-swagger-ui:3.0.0")
-	implementation("io.springfox:springfox-swagger2:3.0.0")*/
-	/*implementation("org.springdoc:springdoc-openapi-data-rest:1.7.0")
-	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
-	implementation("org.springdoc:springdoc-openapi-kotlin:1.7.0")*/
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
