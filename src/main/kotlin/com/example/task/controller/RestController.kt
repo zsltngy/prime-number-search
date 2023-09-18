@@ -28,25 +28,26 @@ class RestController(val primeSearchService: PrimeSearchService) {
                                                                         "thread depends on the thread number path parameter")
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "200", description = "Prime number search started"),
-            ApiResponse(responseCode = "400", description = "Prime number search already started"),
+            ApiResponse(responseCode = "202", description = "Prime number search started"),
+            ApiResponse(responseCode = "200", description = "Prime number search already started"),
+            ApiResponse(responseCode = "400", description = "Thread number need to be between 1 and maxThreadNumber"),
         ]
     )
     @GetMapping("/start/{thread_number}")
     fun start(@PathVariable("thread_number") threadNumber : Int): ResponseEntity<Response> {
         val response = Response()
         return if (!primeSearchService.isRunning) {
-            if (threadNumber <= maxThreadNumber.toInt()) {
+            if (threadNumber > 0 && threadNumber <= maxThreadNumber.toInt()) {
                 primeSearchService.start(threadNumber)
                 response.message = "The prime number search started"
-                ResponseEntity(response, HttpStatusCode.valueOf(200))
+                ResponseEntity(response, HttpStatusCode.valueOf(202))
             } else {
-                response.message = "Thread number cannot be higher than $maxThreadNumber"
+                response.message = "Thread number need to be between 0 and $maxThreadNumber"
                 ResponseEntity(response, HttpStatusCode.valueOf(400))
             }
         } else {
             response.message = "The prime number search already started"
-            ResponseEntity(response, HttpStatusCode.valueOf(400))
+            ResponseEntity(response, HttpStatusCode.valueOf(200))
         }
     }
 
