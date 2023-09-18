@@ -6,10 +6,6 @@ import com.example.task.dto.ResultResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
-/*import io.swagger.annotations.Api
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses*/
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-//@Api(value = "prime", description = "Rest API for prime number search", tags = ["Prime number API"])
 class RestController(val primeSearchService: PrimeSearchService) {
 
     @Value("\${service.max.thread_number}")
@@ -71,7 +66,7 @@ class RestController(val primeSearchService: PrimeSearchService) {
             return ResponseEntity(response, HttpStatusCode.valueOf(401))
         }
         response.message = "The found prime numbers in the given interval"
-        var primeNumberWithinTheInterval = primeSearchService.getPrimeNumberWithinTheInterval(start, end)
+        val primeNumberWithinTheInterval = primeSearchService.getPrimeNumberWithinTheInterval(start, end)
         response.resultCount = primeNumberWithinTheInterval.size
         if (primeNumberWithinTheInterval.size > 100) {
             response.result = primeNumberWithinTheInterval.subList(0, 100)
@@ -81,7 +76,6 @@ class RestController(val primeSearchService: PrimeSearchService) {
             response.result = primeNumberWithinTheInterval
         }
 
-        //need protection against too many hits being retrieved
         return ResponseEntity(response, HttpStatusCode.valueOf(200))
     }
 
